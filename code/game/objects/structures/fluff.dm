@@ -1072,7 +1072,7 @@
 		/obj/item/carvedgem,  //Some of these aren't particularly worth much, but it'd be REALLY unintuitive for "valuables" to not actually be offerings
 		/obj/item/rogueweapon/huntingknife/combat/jadekukri,
 		/obj/item/rogueweapon/huntingknife/combat/opalknife,
-		/obj/item/ammo_casing/caseless/rogue/javelin,
+		/obj/item/rogueweapon/spear/turq,
 		/obj/item/rogueweapon/stoneaxe/battle/coral,
 		/obj/item/rogueweapon/sword/amber,
 		/obj/item/rogueweapon/sword/short/messer/onyxa,
@@ -1567,3 +1567,20 @@
 	stake.forceMove(drop_location())
 	stake = null
 	qdel(src)
+
+/obj/structure/bars/passage/shutter/bookcase
+	name = "Empty Bookcase"
+	desc = "Refuge for few, an irrelevance to most."
+	icon_state = "decoybookcase0"
+
+/obj/structure/bars/passage/shutter/bookcase/redstone_triggered()
+	if(obj_broken)
+		return
+	if(density)
+		icon_state = "decoybookcase1"
+		density = FALSE
+		opacity = FALSE
+	else
+		icon_state = "decoybookcase0"
+		density = TRUE
+		opacity = TRUE
