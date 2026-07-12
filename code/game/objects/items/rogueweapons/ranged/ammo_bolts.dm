@@ -101,10 +101,13 @@
 	min_range = MIN_BOLT_RANGE
 	max_range = MAX_BOLT_RANGE
 	dam_falloff_factor = DAM_FALLOFF_BOLT
+	var/trains_ranged_skill = TRUE
 
 
 /obj/projectile/bullet/reusable/bolt/on_hit(atom/target)
 	. = ..()
+	if(!trains_ranged_skill)
+		return
 	var/mob/living/L = firer
 	if(!L || !L.mind)
 		return
@@ -229,9 +232,6 @@
 	if(isturf(target))
 		explosion(T, heavy_impact_range = 0, light_impact_range = 0, flame_range = 0, smoke = FALSE, soundin = pick('sound/misc/explode/incendiary (1).ogg','sound/misc/explode/incendiary (2).ogg'))
 		loud_message("A loud crash echoes", hearing_distance = 14)
-		if(istype(T, /turf/closed/mineral/rogue/bedrock))
-			return
-		T.turf_integrity -= 1100
 		return
 
 /obj/item/ammo_casing/caseless/rogue/heavy_bolt/blunt
